@@ -1,8 +1,9 @@
 {
-  "extends": "./../../../../../../tsconfig",
+  "extends": "../../../../../tsconfig",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "../../dist/once.loader/main"
+    "outDir": "../../../../../Scenarios/localhost/tla/EAM/Once.Loader/main/"
+
   },
   "include": [
     "./src/**/*"
