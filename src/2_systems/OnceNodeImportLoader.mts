@@ -1,7 +1,7 @@
 import Once, {
   OnceMode,
   OnceState,
-} from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/main/dist/3_services/Once.interface.mjs"
+} from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/thinglish/main/dist/3_services/Once.interface.mjs"
 
 // import DefaultIOR from "../Things/DefaultIOR.class.js";
 // import { BaseNodeOnce } from "../../1_infrastructure/BaseNodeOnce.class.js";
