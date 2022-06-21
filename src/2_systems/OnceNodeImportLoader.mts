@@ -1,19 +1,15 @@
-import Once, {
-  OnceMode,
-  OnceState,
-} from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/thinglish/main/dist/3_services/Once.interface.mjs"
 
 // import DefaultIOR from "../Things/DefaultIOR.class.js";
 // import { BaseNodeOnce } from "../../1_infrastructure/BaseNodeOnce.class.js";
 
-export default class OnceNodeImportLoader implements Once {
+export default class OnceNodeImportLoader {
   get class(): any {
     return OnceNodeImportLoader;
   }
   creationDate: Date;
   ENV = process.env;
-  mode = OnceMode.NODE_LOADER;
-  state = OnceState.DISCOVER_SUCCESS;
+  // mode = OnceMode.NODE_LOADER;
+  // state = OnceState.DISCOVER_SUCCESS;
   private static instance: any;
 
   constructor() {
@@ -67,6 +63,9 @@ export default class OnceNodeImportLoader implements Once {
  * @returns {string} Code to run before application startup
  */
   globalPreload() {
+
+    //HACK
+    //@ts-ignore
     global.NODE_JS = true;
   }
 }
