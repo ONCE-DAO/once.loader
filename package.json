@@ -1,8 +1,8 @@
 {
-  "name": "loader",
+  "name": "Loader",
   "namespace": "tla.EAM.Once",
   "onceDependencies": [
-    "thinglish"
+    "Thinglish"
   ],
   "version": "0.0.1",
   "description": "",
