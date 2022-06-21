@@ -2,14 +2,16 @@
 // import DefaultIOR from "../Things/DefaultIOR.class.js";
 // import { BaseNodeOnce } from "../../1_infrastructure/BaseNodeOnce.class.js";
 
-export default class OnceNodeImportLoader {
+import Once, { OnceMode, OnceState } from "ior:esm:/tla.EAM.Thinglish[main]";
+
+export default class OnceNodeImportLoader implements Once {
   get class(): any {
     return OnceNodeImportLoader;
   }
   creationDate: Date;
   ENV = process.env;
-  // mode = OnceMode.NODE_LOADER;
-  // state = OnceState.DISCOVER_SUCCESS;
+  mode = OnceMode.NODE_LOADER;
+  state = OnceState.DISCOVER_SUCCESS;
   private static instance: any;
 
   constructor() {
