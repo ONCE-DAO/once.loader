@@ -1,31 +1,51 @@
+import Once, { OnceMode, OnceState, resolveContext, loadContext, OnceNodeImportLoader  } from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/dev/index.mjs";
 
-// import DefaultIOR from "../Things/DefaultIOR.class.js";
-// import { BaseNodeOnce } from "../../1_infrastructure/BaseNodeOnce.class.js";
-
-export default class OnceNodeImportLoader {
+export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImportLoader {
   get class(): any {
-    return OnceNodeImportLoader;
+    return DefaultOnceNodeImportLoader;
   }
   creationDate: Date;
   ENV = process.env;
-  // mode = OnceMode.NODE_LOADER;
-  // state = OnceState.DISCOVER_SUCCESS;
+  mode = OnceMode.NODE_LOADER;
+  state = OnceState.DISCOVER_SUCCESS;
   private static instance: any;
+  global: typeof globalThis = global;
 
   constructor() {
     this.creationDate = new Date();
   }
 
+
   static start() {
     if (!this.instance) {
-      this.instance = new OnceNodeImportLoader();
+      this.instance = new DefaultOnceNodeImportLoader();
     }
     return this.instance;
   }
 
   async start(): Promise<void> {
+    console.log("ONCE WILL START AS NODE_LOADER");
+
+    const asyncStartProcess = new Promise((resolve, reject) => {
+
+      setTimeout(() => {
+        console.log("e.g. Once is Installed")
+      }, 1000);
+
+      setTimeout(() => {
+        console.log("or eamd is discovered")
+      }, 2000);
+      setTimeout(() => {
+        console.log("or something else")
+        resolve(undefined);
+      }, 3000);
+    });
+
+    console.log(new Date())
+    await asyncStartProcess
+    console.log(new Date())
+
     console.log("ONCE STARTED AS NODE_LOADER");
-    // return this;
   }
 
   async getEAMD() {
@@ -51,6 +71,8 @@ export default class OnceNodeImportLoader {
     source: string | ArrayBuffer | Int8Array;
   }> {
     // TODO hook it load via IOR
+    console.log("LOAD", url);
+
     return defaultLoad(url, context, defaultLoad);
   }
 
@@ -63,25 +85,9 @@ export default class OnceNodeImportLoader {
  * @returns {string} Code to run before application startup
  */
   globalPreload() {
-
-    //HACK
-    //@ts-ignore
+    console.log("GLOBAL_PRELOAD")
     global.NODE_JS = true;
+    return "console.log('GLOBAL RELOAD RETURN LOG');"
   }
 }
 
-const load = OnceNodeImportLoader.start().load;
-const resolve = OnceNodeImportLoader.start().resolve;
-const globalPreload = OnceNodeImportLoader.start().globalPreload;
-export { load, resolve, globalPreload };
-
-type resolveContext = {
-  conditions: string[];
-  importAssertions: object;
-  parentURL: string | undefined;
-};
-
-type loadContext = {
-  format: string | null | undefined;
-  importAssertions: any;
-};

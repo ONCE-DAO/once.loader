@@ -1,4 +1,4 @@
-import OnceNodeImportLoader, { globalPreload, load, resolve } from "./2_systems/OnceNodeImportLoader.mjs";
+import DefaultOnceNodeImportLoader from "./2_systems/OnceNodeImportLoader.mjs";
 
-export default OnceNodeImportLoader;
-export { load, resolve, globalPreload }
+export default DefaultOnceNodeImportLoader
+export * from "./2_systems/OnceNodeImportLoader.mjs"
