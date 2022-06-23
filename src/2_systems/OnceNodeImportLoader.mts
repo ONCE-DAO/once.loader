@@ -1,26 +1,14 @@
-import Once, { OnceMode, OnceState, resolveContext, loadContext, OnceNodeImportLoader  } from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/dev/index.mjs";
+import Once, { OnceMode, OnceState, resolveContext, loadContext, OnceNodeImportLoader } from "../../../../../../../../Scenarios/localhost/tla/EAM/Thinglish/dev/index.mjs";
 
 export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImportLoader {
-  get class(): any {
-    return DefaultOnceNodeImportLoader;
-  }
   creationDate: Date;
   ENV = process.env;
   mode = OnceMode.NODE_LOADER;
   state = OnceState.DISCOVER_SUCCESS;
-  private static instance: any;
   global: typeof globalThis = global;
 
   constructor() {
     this.creationDate = new Date();
-  }
-
-
-  static start() {
-    if (!this.instance) {
-      this.instance = new DefaultOnceNodeImportLoader();
-    }
-    return this.instance;
   }
 
   async start(): Promise<void> {
@@ -48,17 +36,12 @@ export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImport
     console.log("ONCE STARTED AS NODE_LOADER");
   }
 
-  async getEAMD() {
-    return undefined;
-  }
-
   async resolve(
     specifier: string,
     context: resolveContext,
     defaultResolve: Function
   ): Promise<{ url: string }> {
-    // if (specifier.startsWith("ior:"))
-    //   specifier = await DefaultIOR.load(specifier);
+    console.log("RESOLVE", specifier);
     return defaultResolve(specifier, context, defaultResolve);
   }
 
@@ -70,9 +53,6 @@ export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImport
     format: "builtin" | "commonjs" | "json" | "module" | "wasm";
     source: string | ArrayBuffer | Int8Array;
   }> {
-    // TODO hook it load via IOR
-    console.log("LOAD", url);
-
     return defaultLoad(url, context, defaultLoad);
   }
 
