@@ -5,10 +5,15 @@ export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImport
   ENV = process.env;
   mode = OnceMode.NODE_LOADER;
   state = OnceState.DISCOVER_SUCCESS;
+  private static instance: any;
   global: typeof globalThis = global;
 
   constructor() {
     this.creationDate = new Date();
+  }
+
+  static start() {
+    return new DefaultOnceNodeImportLoader();
   }
 
   async start(): Promise<void> {
@@ -34,6 +39,10 @@ export default class DefaultOnceNodeImportLoader implements Once, OnceNodeImport
     console.log(new Date())
 
     console.log("ONCE STARTED AS NODE_LOADER");
+  }
+
+  async getEAMD() {
+    return undefined;
   }
 
   async resolve(
